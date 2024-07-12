@@ -1,4 +1,11 @@
 #!/bin/bash
+
+swapoff -a
+sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+setenforce 0
+sed -i 's/^SELINUX=enforcing$/SELINUX=disabled/' /etc/selinux/config
+
 modprobe overlay
 modprobe br_netfilter
 
